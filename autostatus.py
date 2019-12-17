@@ -57,7 +57,7 @@ def startStatus():
     elif nowTime >= 23 and nowTime < 6:
         greeting = "Доброй ночи"
     else:
-        greeting = "Доброго времени суток!"
+        greeting = "Доброго времени суток"
     
     statusSave = ("{0} {1}! Сейчас {1}℃, Доллар: {2}р Евро: {3}р".format(greeting,
         city, str(data["main"]["temp"]), Dollar, Euro))
