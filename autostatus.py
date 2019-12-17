@@ -73,9 +73,9 @@ def startStatus():
     if data == 0:
         weather = "А что с погодой то? Непонятно..."
     else:
-        weather = ("Сейчас {0}℃, облачность {1}%, ветер {2} м/с, направление {3} градусов, давление {4} гектопаскалей, влажность {5}%".format(
-            str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]), str(data["main"]["pressure"]),
-            str(data["main"]["humidity"])))
+        weather = ("Сейчас {0}℃, облачность {1}%, влажность {2}%, ветер {3} м/с, направление {4} градусов, давление {5} гектопаскалей".format(
+            str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["main"]["humidity"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]),
+            str(data["main"]["pressure"])))
     
     statusSave = ("{0} {1}! {2}".format(greeting, city, weather))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
