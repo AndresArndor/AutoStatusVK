@@ -59,6 +59,7 @@ def startStatus():
     else:
         greeting = "Доброго времени суток!"
 
+    
     statusSave = ("{0} Погода в '{1}': {2}℃ Доллар: {3}р | Евро: {4}р".format(greeting,
         city, str(data["main"]["temp"]), Dollar, Euro))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
