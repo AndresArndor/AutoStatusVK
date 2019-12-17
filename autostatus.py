@@ -23,7 +23,7 @@ def startStatus():
 
     data = requests.get("http://api.openweathermap.org/data/2.5/weather",
     params = {"q": city,
-              "appid": "778d98cf94b6609bec655b872f24b907",
+         #     "appid": "778d98cf94b6609bec655b872f24b907",
               "units": "metric",
               "lang": "eng"}).json()
 
