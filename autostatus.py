@@ -57,6 +57,8 @@ def startStatus():
     nowTime = nowTime+4
     nowDate = today.strftime("%d.%m.%Y")
     
+    print(nowTime)
+    
     if nowTime >= 6 and nowTime < 12:
         greeting = "Доброе утро,"
     elif nowTime >= 12 and nowTime < 17:
