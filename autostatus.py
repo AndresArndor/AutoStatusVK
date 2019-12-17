@@ -33,6 +33,7 @@ def startStatus():
         print(data)
     except:
         print("no weather data")
+        data = "no weather data"
 
 #    try:
 #        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
