@@ -27,7 +27,7 @@ def startStatus():
             "units": "metric",
             "lang": "eng"}).json()
     except:
-            pass
+        pass
 
     try:
         print(data)
