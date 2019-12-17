@@ -33,7 +33,7 @@ def startStatus():
         print(data)
     except:
         print("no weather data")
-        data = "no weather data"
+        data = 0
 
 #    try:
 #        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
@@ -42,11 +42,11 @@ def startStatus():
 #        print("У профиля отсутсвует аватар или лайки.")
 #        getLikes = 0
 
- #   getValuts = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=6780a6de85b0690a6e0f02e6fc5bfd4f").json().get("data")
- #   Dollar = getValuts.get("USDRUB")
- #   Euro = getValuts.get("EURRUB")
- #   Dollar = Dollar[:Dollar.find('.')]
- #   Euro = Euro[:Euro.find('.')]
+    getValuts = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=6780a6de85b0690a6e0f02e6fc5bfd4f").json().get("data")
+    Dollar = getValuts.get("USDRUB")
+    Euro = getValuts.get("EURRUB")
+    Dollar = Dollar[:Dollar.find('.')]
+    Euro = Euro[:Euro.find('.')]
 
     today = datetime.datetime.today()
     nowTime = today.strftime("%H")
@@ -65,9 +65,12 @@ def startStatus():
     else:
         greeting = "Доброго времени суток"
     
-    weather = ("Сейчас {0}℃, облачность {1}%, ветер {2} на {3} градусов, давление {4} гектопаскалей, влажность {5}%".format(
-        str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]), str(data["main"]["pressure"]),
-        str(data["main"]["humidity"])))
+    if data == 0:
+        weather = "А что с погодой то? Непонятно..."
+    else:
+        weather = ("Сейчас {0}℃, облачность {1}%, ветер {2} на {3} градусов, давление {4} гектопаскалей, влажность {5}%".format(
+            str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]), str(data["main"]["pressure"]),
+            str(data["main"]["humidity"])))
     
     statusSave = ("{0} {1}! {2}".format(greeting, city, weather))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
