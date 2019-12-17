@@ -59,8 +59,8 @@ def startStatus():
     else:
         greeting = "Доброго времени суток"
     
-    statusSave = ("{0} {1}! Сейчас {2}℃, Доллар: {3}р Евро: {4}р".format(greeting,
-        city, str(data["main"]["temp"]), Dollar, Euro))
+    statusSave = ("{0} {1}! Сейчас {2}℃, облачность {3}%, ветер".format(greeting,
+        city, str(data["main"]["temp"]), str(data["clouds"]["all"]), ))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
 #    if statusOut.get("error", None):
 #        print(f"Не удалось обновить статус сервер вернул неверный код ответа: {statusOut}")
