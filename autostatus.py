@@ -11,7 +11,7 @@ import time
 from env import token
 
 #token = env(token) #Сюда вводим свой токен.
-timeKD = 60 #Сюда вводим время обновления статуса.(Время в секундах)
+timeKD = 600 #Сюда вводим время обновления статуса.(Время в секундах)
 
 def startStatus():
     getCountry = requests.get(f"https://api.vk.com/method/account.getProfileInfo?v=5.95&access_token={token}").json()
