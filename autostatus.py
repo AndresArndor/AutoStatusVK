@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from urllib import request
@@ -8,7 +8,9 @@ import urllib
 import json
 import time
 
-token = "" #Сюда вводим свой токен.
+from env import token
+
+#token = env(token) #Сюда вводим свой токен.
 timeKD = 60 #Сюда вводим время обновления статуса.(Время в секундах)
 
 def startStatus():
@@ -23,13 +25,16 @@ def startStatus():
     params = {"q": city,
               "appid": "778d98cf94b6609bec655b872f24b907",
               "units": "metric",
-              "lang": "ru"}).json()
-    try:
-        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
-        getLikes = getLikes["response"]["items"][0]["likes"]["count"]
-    except IndexError:
-        print("У профиля отсутсвует аватар или лайки.")
-        getLikes = 0
+              "lang": "eng"}).json()
+
+    print(data)
+
+#    try:
+#        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
+#        getLikes = getLikes["response"]["items"][0]["likes"]["count"]
+#    except IndexError:
+#        print("У профиля отсутсвует аватар или лайки.")
+#        getLikes = 0
 
     getValuts = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=6780a6de85b0690a6e0f02e6fc5bfd4f").json().get("data")
     Dollar = getValuts.get("USDRUB")
@@ -38,16 +43,29 @@ def startStatus():
     Euro = Euro[:Euro.find('.')]
 
     today = datetime.datetime.today()
-    nowTime = today.strftime("%H:%M")
+    nowTime = today.strftime("%H")
+    nowTime = int(nowTime)
+    nowTime = nowTime+4
     nowDate = today.strftime("%d.%m.%Y")
-
-    statusSave = ("Время: {0} | Дата: {1} | Погода в '{2}': {3}℃ | Лайков на аве: {4} | Доллар: {5}р | Евро: {6}р".format(nowTime, nowDate,
-        data["name"], str(data["main"]["temp"]), getLikes, Dollar, Euro))
-    statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
-    if statusOut.get("error", None):
-        print(f"Не удалось обновить статус сервер вернул неверный код ответа: {statusOut}")
+    
+    if nowTime >= 6 and nowTime < 12:
+        greeting = "Доброе утро!"
+    elif nowTime >= 12 and nowTime < 17:
+        greeting = "Добрый день!"
+    elif nowTime >= 17 and nowTime < 23:
+        greeting = "Добрый вечер!"
+    elif nowTime >= 23 and nowTime < 6:
+        greeting = "Доброй ночи!"
     else:
-        print(f"Статус был обновлен")
+        greeting = "Доброго времени суток!"
+
+    statusSave = ("{0} Погода в '{1}': {2}℃ Доллар: {3}р | Евро: {4}р".format(greeting,
+        city, str(data["main"]["temp"]), Dollar, Euro))
+    statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
+#    if statusOut.get("error", None):
+#        print(f"Не удалось обновить статус сервер вернул неверный код ответа: {statusOut}")
+#    else:
+#        print(f"Статус был обновлен")
 
 while True:
     startStatus()
