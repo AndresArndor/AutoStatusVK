@@ -21,13 +21,13 @@ def startStatus():
         print("У профиля не указан город, по умолчанию была выбрана Москва.")
         city = "Москва"
 
-#    data = requests.get("http://api.openweathermap.org/data/2.5/weather",
-#    params = {"q": city,
-#              "appid": "778d98cf94b6609bec655b872f24b907",
-#              "units": "metric",
-#              "lang": "eng"}).json()
-#
-#    print(data)
+    data = requests.get("http://api.openweathermap.org/data/2.5/weather",
+    params = {"q": city,
+              "appid": "778d98cf94b6609bec655b872f24b907",
+              "units": "metric",
+              "lang": "eng"}).json()
+
+    print(data)
 
 #    try:
 #        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
@@ -59,11 +59,11 @@ def startStatus():
     else:
         greeting = "Доброго времени суток"
     
-    #statusSave = ("{0} {1}! Сейчас {2}℃, облачность {3}%, ветер {4} на {5} градусов, давление {6} гектопаскалей, влажность {7}%".format(greeting,
-    #    city, str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]), str(data["main"]["pressure"]),
-    #          str(data["main"]["humidity"])))
+    weather = ("Сейчас {0}℃, облачность {1}%, ветер {2} на {3} градусов, давление {4} гектопаскалей, влажность {5}%".format(
+        str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]), str(data["main"]["pressure"]),
+        str(data["main"]["humidity"])))
     
-    statusSave = ("{0} {1}! ".format(greeting, city))
+    statusSave = ("{0} {1}! {2}".format(greeting, city, weather))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
 #    if statusOut.get("error", None):
 #        print(f"Не удалось обновить статус сервер вернул неверный код ответа: {statusOut}")
