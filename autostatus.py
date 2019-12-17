@@ -42,12 +42,6 @@ def startStatus():
 #        print("У профиля отсутсвует аватар или лайки.")
 #        getLikes = 0
 
-    getValuts = requests.get("https://currate.ru/api/?get=rates&pairs=USDRUB,EURRUB&key=6780a6de85b0690a6e0f02e6fc5bfd4f").json().get("data")
-    Dollar = getValuts.get("USDRUB")
-    Euro = getValuts.get("EURRUB")
-    Dollar = Dollar[:Dollar.find('.')]
-    Euro = Euro[:Euro.find('.')]
-
     today = datetime.datetime.today()
     nowTime = today.strftime("%H")
     nowTime = int(nowTime)
