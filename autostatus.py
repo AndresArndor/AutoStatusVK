@@ -49,17 +49,17 @@ def startStatus():
     nowDate = today.strftime("%d.%m.%Y")
     
     if nowTime >= 6 and nowTime < 12:
-        greeting = "Доброе утро"
+        greeting = "Доброе утро,"
     elif nowTime >= 12 and nowTime < 17:
-        greeting = "Добрый день"
+        greeting = "Добрый день,"
     elif nowTime >= 17 and nowTime < 23:
-        greeting = "Добрый вечер"
+        greeting = "Добрый вечер,"
     elif nowTime >= 23 and nowTime < 6:
-        greeting = "Доброй ночи"
+        greeting = "Доброй ночи,"
     else:
         greeting = "Доброго времени суток"
     
-    statusSave = ("{0} {1}! Сейчас {1}℃, Доллар: {2}р Евро: {3}р".format(greeting,
+    statusSave = ("{0} {1}! Сейчас {2}℃, Доллар: {3}р Евро: {4}р".format(greeting,
         city, str(data["main"]["temp"]), Dollar, Euro))
     statusOut = requests.get(f"https://api.vk.com/method/status.set?text={statusSave}&v=5.95&access_token={token}").json()
 #    if statusOut.get("error", None):
