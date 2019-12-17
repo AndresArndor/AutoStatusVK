@@ -20,14 +20,19 @@ def startStatus():
     except KeyError:
         print("У профиля не указан город, по умолчанию была выбрана Москва.")
         city = "Москва"
+    try:
+        data = requests.get("http://api.openweathermap.org/data/2.5/weather",
+        params = {"q": city,
+            "appid": "778d98cf94b6609bec655b872f24b907",
+            "units": "metric",
+            "lang": "eng"}).json()
+    except:
+            pass
 
-    data = requests.get("http://api.openweathermap.org/data/2.5/weather",
-    params = {"q": city,
-              "appid": "778d98cf94b6609bec655b872f24b907",
-              "units": "metric",
-              "lang": "eng"}).json()
-
-    print(data)
+    try:
+        print(data)
+    except:
+        print("no weather data")
 
 #    try:
 #        getLikes = requests.get(f"https://api.vk.com/method/photos.get?album_id=profile&rev=1&extended=1&count=1&v=5.95&access_token={token}").json()
