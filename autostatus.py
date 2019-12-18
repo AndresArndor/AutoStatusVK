@@ -71,7 +71,7 @@ def startStatus():
         greeting = "Доброго времени суток"
     
     if data == 0:
-        weather = "А что с погодой то? Непонятно..."
+        weather = "Данные о погоде недоступны..."
     else:
         weather = ("Сейчас {0}℃, облачность {1}%, влажность {2}%, ветер {3} м/с, направление {4} градусов, давление {5} гектопаскалей".format(
             str(data["main"]["temp"]), str(data["clouds"]["all"]), str(data["main"]["humidity"]), str(data["wind"]["speed"]), str(data["wind"]["deg"]),
