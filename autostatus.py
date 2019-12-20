@@ -65,7 +65,7 @@ def startStatus():
         greeting = "Добрый день,"
     elif nowTime >= 17 and nowTime < 23:
         greeting = "Добрый вечер,"
-    elif nowTime >= 23 and nowTime < 6:
+    elif nowTime >= 23 or nowTime < 6:
         greeting = "Доброй ночи,"
     else:
         greeting = "Доброго времени суток"
