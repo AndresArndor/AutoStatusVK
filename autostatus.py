@@ -18,7 +18,7 @@ def startStatus():
     try:
         city = getCountry["response"]["city"]["title"]
     except KeyError:
-        print("У профиля не указан город, по умолчанию была выбрана Москва.")
+        print("У профиля не указан город, по умолчанию был выбран Саратов.")
         city = "Саратов"
     try:
         data = requests.get("http://api.openweathermap.org/data/2.5/weather",
